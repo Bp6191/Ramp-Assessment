@@ -81,7 +81,7 @@ hr.RampBreak--l {
 
 .RampInputSelect--root {
   width: 100%;
-  position: relative;
+  /* position: relative; */
 }
 
 .RampInputSelect--input {

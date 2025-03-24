@@ -31,12 +31,4 @@ export type SetTransactionApprovalParams = {
   value: boolean
 }
 
-export interface PaginatedTransactionsResult {
-  data: PaginatedResponse<Transaction[]> | null
-  loading: boolean
-  fetchAll: () => Promise<void>
-  invalidateData: () => void
-  setTransactionApproval: (args: { transactionId: string; newValue: boolean }) => void
-}
-
 
