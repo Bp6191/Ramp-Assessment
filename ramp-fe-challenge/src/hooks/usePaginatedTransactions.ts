@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react"
-import { PaginatedRequestParams, PaginatedResponse, Transaction, PaginatedTransactionsResult } from "../utils/types"
+import { PaginatedRequestParams, PaginatedResponse, Transaction } from "../utils/types"
 import { setTransactionApproval as mockSetTransactionApproval } from "../utils/requests"
-// import { PaginatedTransactionsResult } from "./types"
+import { PaginatedTransactionsResult } from "./types"
 import { useCustomFetch } from "./useCustomFetch"
 
 export function usePaginatedTransactions(): PaginatedTransactionsResult {
@@ -33,27 +33,8 @@ export function usePaginatedTransactions(): PaginatedTransactionsResult {
     setPaginatedTransactions(null)
   }, [])
 
-  const setTransactionApproval = useCallback(
-    ({ transactionId, newValue }: { transactionId: string; newValue: boolean }) => {
-      // 🔁 Sync with mock data (simulate DB update)
-      mockSetTransactionApproval({ transactionId, value: newValue })
-  
-      // ✅ Update frontend state so UI reflects change
-      setPaginatedTransactions((prev) => {
-        if (prev === null) return prev
-  
-        const updatedData = prev.data.map((tx) =>
-          tx.id === transactionId ? { ...tx, approved: newValue } : tx
-        )
-  
-        return { ...prev, data: updatedData }
-      })
-    },
-    []
-  )
-  
 
-  return { data: paginatedTransactions, loading, fetchAll, invalidateData, setTransactionApproval }
+  return { data: paginatedTransactions, loading, fetchAll, invalidateData }
 
 }
 
